@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Docker Ecosystem</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Docker Ecosystem</h1>
+    <h2>Response from Java service</h2>
+    <pre id="java-service-response">Waiting for response&hellip;</pre>
+    <h2>Response from Node service</h2>
+    <pre id="node-service-response">Waiting for response&hellip;</pre>
+    <script>
+      var getJson = function (url, callback) {
+        var request = new XMLHttpRequest();
+        request.open("GET", url);
+        request.onload = function () {
+          callback(JSON.parse(request.responseText));
+        };
+        request.send();
+      };
+
+      getJson("http://192.168.99.110:4567/people", function (people) {
+        document.getElementById("java-service-response").innerText = JSON.stringify(people);
+      });
+      getJson("http://192.168.99.110:5678/people", function (people) {
+        document.getElementById("node-service-response").innerText = JSON.stringify(people);
+      });
+    </script>
+  </body>
+</html>
