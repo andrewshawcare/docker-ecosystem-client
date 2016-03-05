@@ -1,0 +1,29 @@
+version: "2"
+volumes:
+  database-data:
+services:
+  docker-ecosystem-client:
+    image: ${REGISTRY}/docker-ecosystem-client:${IMAGE_VERSION}
+    ports:
+      - '80:80'
+    build: .
+  java-service:
+    image: andrewshawcare/docker-ecosystem-java-service
+    ports:
+      - 4567:4567
+    links:
+      - database
+  node-service:
+    image: andrewshawcare/docker-ecosystem-node-service
+    ports:
+      - 5678:5678
+    links:
+      - database
+  migration:
+    image: andrewshawcare/docker-ecosystem-migration
+    links:
+      - database
+  database:
+    image: postgres:9.5.1
+    volumes:
+      - database-data:/var/lib/postgres/data
