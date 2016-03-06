@@ -4,21 +4,26 @@ volumes:
 services:
   docker-ecosystem-client:
     image: ${REGISTRY}/docker-ecosystem-client:${IMAGE_VERSION}
+    build: .
     ports:
       - '80:80'
-    build: .
+    links:
+      - java-service
+      - node-service
   java-service:
     image: andrewshawcare/docker-ecosystem-java-service
     ports:
       - 4567:4567
     links:
       - database
+      - migration
   node-service:
     image: andrewshawcare/docker-ecosystem-node-service
     ports:
       - 5678:5678
     links:
       - database
+      - migration
   migration:
     image: andrewshawcare/docker-ecosystem-migration
     links:
