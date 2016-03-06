@@ -11,7 +11,7 @@ services:
       - java-service
       - node-service
   java-service:
-    image: andrewshawcare/docker-ecosystem-java-service
+    image: ${IMAGE_REGISTRY}/docker-ecosystem-java-service
     ports:
       - 4567:4567
     links:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - migration
   node-service:
-    image: andrewshawcare/docker-ecosystem-node-service
+    image: ${IMAGE_REGISTRY}/docker-ecosystem-node-service
     ports:
       - 5678:5678
     links:
@@ -27,7 +27,7 @@ services:
     depends_on:
       - migration
   migration:
-    image: andrewshawcare/docker-ecosystem-migration
+    image: ${IMAGE_REGISTRY}/docker-ecosystem-migration
     links:
       - database
   database:
