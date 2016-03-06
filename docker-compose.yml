@@ -3,7 +3,7 @@ volumes:
   database-data:
 services:
   docker-ecosystem-client:
-    image: ${REGISTRY}/docker-ecosystem-client:${IMAGE_VERSION}
+    image: ${IMAGE_REGISTRY}/docker-ecosystem-client:${IMAGE_VERSION}
     build: .
     ports:
       - '80:80'
