@@ -1,7 +1,8 @@
 FROM nginx
 
-COPY ./docker-entrypoint.sh .
-
 COPY ./html /usr/share/nginx/html
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
+COPY ./wait-for-it.sh .
+COPY ./docker-entrypoint.sh .
+
+ENTRYPOINT ["./wait-for-it.sh", "java-service:4567", "--", "./wait-for-it.sh", "node-service:5678", "--", "./docker-entrypoint.sh"]
