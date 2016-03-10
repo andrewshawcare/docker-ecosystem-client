@@ -12,16 +12,12 @@ services:
       - node-service
   java-service:
     image: ${IMAGE_REGISTRY}/docker-ecosystem-java-service
-    ports:
-      - 4567:4567
     links:
       - database
     depends_on:
       - migration
   node-service:
     image: ${IMAGE_REGISTRY}/docker-ecosystem-node-service
-    ports:
-      - 5678:5678
     links:
       - database
     depends_on:
