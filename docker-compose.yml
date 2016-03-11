@@ -6,7 +6,7 @@ services:
     image: ${IMAGE_REGISTRY}/docker-ecosystem-client:${IMAGE_VERSION}
     build: .
     ports:
-      - '80:80'
+      - '80'
     links:
       - java-service
       - node-service
