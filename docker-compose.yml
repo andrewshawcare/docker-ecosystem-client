@@ -3,7 +3,7 @@ volumes:
   database-data:
 services:
   docker-ecosystem-client:
-    image: ${IMAGE_REGISTRY}/docker-ecosystem-client:${IMAGE_VERSION}
+    image: ${REGISTRYHOST}/docker-ecosystem-client:${TAG}
     build: .
     ports:
       - '80'
@@ -11,19 +11,19 @@ services:
       - java-service
       - node-service
   java-service:
-    image: ${IMAGE_REGISTRY}/docker-ecosystem-java-service
+    image: ${REGISTRYHOST}/docker-ecosystem-java-service
     links:
       - database
     depends_on:
       - migration
   node-service:
-    image: ${IMAGE_REGISTRY}/docker-ecosystem-node-service
+    image: ${REGISTRYHOST}/docker-ecosystem-node-service
     links:
       - database
     depends_on:
       - migration
   migration:
-    image: ${IMAGE_REGISTRY}/docker-ecosystem-migration
+    image: ${REGISTRYHOST}/docker-ecosystem-migration
     links:
       - database
   database:
